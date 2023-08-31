@@ -1,5 +1,6 @@
 import { verify } from "jsonwebtoken";
-import { pool } from "../config/config";
+import { connectToDatabase } from "../config/config";
+
 /**
  * 
  * this function for execute query
@@ -9,9 +10,9 @@ import { pool } from "../config/config";
  * @returns 
  */
 
-export const query = (query: string, params?: string[] | number[] | any) => {
+export const Query = (query: string, params?: string[] | number[] | any) => {
     return new Promise((resolve, reject) => {
-        pool.query(query, params, async (error: any, rows: any, fields: any) => {
+        connectToDatabase().query(query, params, async (error: any, rows: any, fields: any) => {
             if (error) throw reject(error);
             resolve({ rows, fields })
         })
@@ -27,7 +28,7 @@ export const query = (query: string, params?: string[] | number[] | any) => {
  * @param res 
  * @returns 
  */
-export const responseOK = async (values: any, status: number, res: any) => {
+export const ResponseOK = async (values: any, status: number, res: any) => {
     let msg: any
     interface components {
         host: any
@@ -50,7 +51,7 @@ export const responseOK = async (values: any, status: number, res: any) => {
     msg = data.values.pesan
 
     if (data.values.status === 'GAGAL') {
-        await query(`INSERT INTO monitor_log_error VALUES(?, ?, ?, NOW())`, [
+        await Query(`INSERT INTO monitor_log_error VALUES(?, ?, ?, NOW())`, [
             handle.file,
             handle.url,
             JSON.stringify(msg) + msg,
@@ -67,7 +68,7 @@ export const responseOK = async (values: any, status: number, res: any) => {
  * 
  * this funstion for describe error
  */
-export const dumpError = (err: any) => {
+export const DumpError = (err: unknown | any) => {
     if (typeof err === "object") {
         if (err) {
             console.log(err);
@@ -87,22 +88,22 @@ export const dumpError = (err: any) => {
 /**
  * this function for start transaction sql query
  */
-export const starttransaction = async () => {
-    await query("START TRANSACTION")
+export const StartTransaction = async () => {
+    await Query("START TRANSACTION")
 }
 
 /**
  * this function for commit finist start transaction
  */
-export const commit = async () => {
-    await query("COMMIT")
+export const Commit = async () => {
+    await Query("COMMIT")
 }
 
 /**
  * this function for error sql start transaction rollback
  */
-export const rollback = async () => {
-    await query("ROLLBACK")
+export const Rollback = async () => {
+    await Query("ROLLBACK")
 }
 
 /**
@@ -113,7 +114,7 @@ export const rollback = async () => {
  * @returns 
  */
 
-export const decodedToken = (req: any): object | string | string[] => {
+export const DecodedToken = (req: any): object | string | string[] => {
     const authHeader = req.header("Authorization")
     const token = authHeader && authHeader.split(' ')[1]
     const decoded = verify(token, 'process.env.TOKEN_KEY')

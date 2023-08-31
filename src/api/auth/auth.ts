@@ -1,5 +1,5 @@
 import { verify } from "jsonwebtoken";
-import { dumpError } from "../utils/utils";
+import { DumpError } from "../../utils/utils";
 
 exports.auth = async ({ req, res, next }: any) => {
     const authHeader = req.header("Authorization")
@@ -12,7 +12,7 @@ exports.auth = async ({ req, res, next }: any) => {
         req.user = verified
         return next()
     } catch (error) {
-        dumpError(error)
+        DumpError(error)
         return res.status(400).send({ message: 'Invalid token' })
     }
 };
