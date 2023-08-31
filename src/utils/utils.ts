@@ -1,5 +1,5 @@
 import { verify } from "jsonwebtoken";
-import { connectToDatabase } from "../config/config";
+import { connectToDatabase } from "../database/config";
 
 /**
  * 

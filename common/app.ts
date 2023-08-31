@@ -37,7 +37,9 @@ export const BootstrapModule = (
             cookies && app.use(cookieParser())
             bodyparser && app.use(bodyParser.urlencoded({ extended: true }))
 
-            app.use(RoutesLoader(path.join(__dirname.replace('common', 'src'), '/api/controllers/'), true));
+            routePrefix
+                ? app.use(routePrefix, RoutesLoader(path.join(__dirname.replace('common', 'src'), '/api/controllers/'), true))
+                : app.use(RoutesLoader(path.join(__dirname.replace('common', 'src'), '/api/controllers/'), true));
 
             app.get('/', async (req, res) => {
                 res.send('test')

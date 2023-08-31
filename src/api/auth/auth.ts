@@ -1,7 +1,7 @@
 import { verify } from "jsonwebtoken";
 import { DumpError } from "../../utils/utils";
 
-exports.auth = async ({ req, res, next }: any) => {
+export const Auth = async ({ req, res, next }: any) => {
     const authHeader = req.header("Authorization")
     const token = authHeader && authHeader.split(' ')[1]
     if (!authHeader) {
