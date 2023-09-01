@@ -1,5 +1,5 @@
 import { verify } from "jsonwebtoken";
-import { connectToDatabase } from "../api/database/MysqlConfig";
+import { db } from "../database/MysqlConfig";
 import chalk from "chalk";
 
 /**
@@ -13,7 +13,7 @@ import chalk from "chalk";
 
 export const Query = (query: string, params?: string[] | number[] | any) => {
     return new Promise((resolve, reject) => {
-        connectToDatabase().query(query, params, async (error: any, rows: any, fields: any) => {
+        db.query(query, params, async (error: any, rows: any, fields: any) => {
             if (error) throw reject(error);
             resolve({ rows, fields })
         })

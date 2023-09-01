@@ -7,7 +7,7 @@ import Cors from 'cors';
 import 'dotenv/config'
 import { RoutesLoader } from '../src/loader/ExpressLoader';
 import path from 'path';
-import { connectToDatabase } from '../src/api/database/MysqlConfig';
+import { connectToDatabase } from '../src/database/MysqlConfig';
 
 interface Props {
     port?: number,

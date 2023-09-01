@@ -1,6 +1,6 @@
 import { DumpError } from "../../utils"
 import { Request, Response } from "express"
-import { db } from "../database/MysqlConfig"
+import { db } from "../../database/MysqlConfig"
 import { ResponseTestData } from "./interface"
 import { ValidateSchema } from "../../utils/ValidateSchema"
 import { RequestTestSchema, ResponseTestSchema } from "./schema/testSchema"
