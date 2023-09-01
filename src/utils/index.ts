@@ -1,6 +1,8 @@
 import { verify } from "jsonwebtoken";
 import { db } from "../database/MysqlConfig";
 import chalk from "chalk";
+import { Request } from "express";
+import { MysqlError } from "mysql";
 
 /**
  * 
@@ -72,9 +74,9 @@ export const Rollback = async () => {
  * @returns 
  */
 
-export const DecodedToken = (req: any): object | string | string[] => {
+export const DecodedToken = (req: Request): object | string | string[] => {
     const authHeader = req.header("Authorization")
     const token = authHeader && authHeader.split(' ')[1]
-    const decoded = verify(token, 'process.env.TOKEN_KEY')
+    const decoded = verify(String(token), 'process.env.TOKEN_KEY')
     return decoded
 }

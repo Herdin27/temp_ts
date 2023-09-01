@@ -1,3 +1,4 @@
+import { MysqlError } from "mysql"
 import { DumpError } from "../../utils"
 import { Request, Response } from "express"
 import { db } from "../../database/MysqlConfig"
@@ -14,7 +15,7 @@ export const TestServiceModule = async (req: Request<any>, res: Response<any, Re
             })
         if (!validate) return ResponseNetworkError(data, res)
 
-        db.query('select * from temp_muat', (err: any, rows: ResponseTestData[]) => {
+        db.query('select * from temp_muat', (err: MysqlError, rows: ResponseTestData[]) => {
             if (err) return ResponseNetworkError(err, res)
             for (let i in rows) {
                 const { validate, data }: { validate: boolean, data: ResponseTestData } = ValidateSchema(ResponseTestSchema, {

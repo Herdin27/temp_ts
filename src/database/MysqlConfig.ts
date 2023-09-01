@@ -1,4 +1,4 @@
-import mysql, { Pool, PoolConnection } from 'mysql'
+import mysql, { MysqlError, Pool, PoolConnection } from 'mysql'
 
 export function connectToDatabase(viewLog?: boolean) {
     const connection: Pool = mysql.createPool({
@@ -12,7 +12,7 @@ export function connectToDatabase(viewLog?: boolean) {
         database: String(process.env.DB_NAME),
         multipleStatements: true
     });
-    connection.getConnection(function (err: any, connection: PoolConnection) {
+    connection.getConnection(function (err: MysqlError, connection: PoolConnection) {
         if (err) {
             connection.release();
             throw err;

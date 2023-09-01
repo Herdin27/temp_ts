@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
+import { Request, Response, Router } from "express";
 import { TestServiceModule } from "../services/testService";
 
-export default function (router: any) {
+export default function (router: Router) {
 
     //@Get('/test')
     router.get('/test', async (req: Request, res: Response) => {

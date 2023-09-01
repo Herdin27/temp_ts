@@ -3,12 +3,12 @@ import { JTDDataType } from "ajv/dist/core"
 
 const ajv = new Ajv()
 
-export const ValidateSchema = (Schema: any, dataDto: any): { validate: boolean, data: any } => {
+export const ValidateSchema = (Schema: any, dataDto: string[] | any): { validate: boolean, data: string | any } => {
 
     type MyData = JTDDataType<typeof Schema>
-    const validate: any = ajv.compile<MyData>(Schema)
+    const validate = ajv.compile<MyData>(Schema)
 
-    switch (validate(dataDto)) {
+    switch (Boolean(validate(dataDto))) {
         case true:
             return {
                 validate: true,
