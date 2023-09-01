@@ -1,5 +1,5 @@
 import { Response } from "express"
-import { DumpError } from "../../utils"
+import { DumpError } from "../../../utils"
 
 export const ResponseOk = (data: any, res: Response) => {
     return res.status(200).send({

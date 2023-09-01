@@ -1,5 +1,5 @@
 import { verify } from "jsonwebtoken";
-import { connectToDatabase } from "../database/MysqlConfig";
+import { connectToDatabase } from "../api/database/MysqlConfig";
 import chalk from "chalk";
 
 /**

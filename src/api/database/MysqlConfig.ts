@@ -23,3 +23,5 @@ export function connectToDatabase(viewLog?: boolean) {
 
     return connection;
 }
+
+export const db = connectToDatabase()
