@@ -51,8 +51,7 @@ export const BootstrapModule = (
             resolve(app.listen(process.env.PORT || port, () => {
                 console.log(
                     chalk.red(`Running`),
-                    chalk.green(`${chalk.white(`on PORT`)} ${chalk.blue(process.env.PORT || port)}`
-                    )
+                    chalk.green(`${chalk.white(`on PORT`)} ${chalk.blue(process.env.PORT || port)}`)
                 )
             }))
         } catch (error) {
