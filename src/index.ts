@@ -2,6 +2,7 @@ import { BootstrapModule } from "../common/app";
 
 BootstrapModule({
     port: 8000,
+    LogConnectionToDB: false
     // routePrefix : '/api'
 })
     .then((Running) => Running)

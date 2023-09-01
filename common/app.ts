@@ -7,6 +7,7 @@ import Cors from 'cors';
 import 'dotenv/config'
 import { RoutesLoader } from '../src/loader/ExpressLoader';
 import path from 'path';
+import { connectToDatabase } from '../src/database/MysqlConfig';
 
 interface Props {
     port?: number,
@@ -14,7 +15,8 @@ interface Props {
     reqIp?: boolean,
     cookies?: boolean,
     bodyparser?: boolean,
-    routePrefix?: string
+    routePrefix?: string,
+    LogConnectionToDB?: boolean
 }
 
 export const BootstrapModule = (
@@ -24,7 +26,8 @@ export const BootstrapModule = (
         reqIp,
         cookies,
         bodyparser,
-        routePrefix
+        routePrefix,
+        LogConnectionToDB
     }: Props
 ): Promise<unknown> => {
 
@@ -32,6 +35,7 @@ export const BootstrapModule = (
 
     return new Promise(async function (resolve, reject) {
         try {
+            LogConnectionToDB && connectToDatabase(true)
             cors && app.use(Cors())
             reqIp && app.use(resIp.mw())
             cookies && app.use(cookieParser())

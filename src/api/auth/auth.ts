@@ -1,5 +1,5 @@
 import { verify } from "jsonwebtoken";
-import { DumpError } from "../../utils/utils";
+import { DumpError } from "../../utils";
 
 export const Auth = async ({ req, res, next }: any) => {
     const authHeader = req.header("Authorization")

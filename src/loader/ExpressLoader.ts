@@ -1,13 +1,12 @@
 import { Router } from "express";
+import * as fs from 'fs'
+import path from "path";
+
 
 export function RoutesLoader(loadPath: string, recursive: boolean): Router {
 
-    const express = require('express');
-    const fs = require('fs');
-    const path = require('path');
+    let router = Router();
 
-    let router = express.Router();
-    
     if (!loadPath) loadPath = './controllers';
 
     const walk = (dir: string) => {
@@ -33,7 +32,7 @@ export function RoutesLoader(loadPath: string, recursive: boolean): Router {
 
         if (fs.statSync(file).isFile() &&
             ['.js', '.ts'].indexOf(path.extname(file).toLowerCase()) !== -1 &&
-            path.basename(file).substr(0, 1) !== '.') {
+            path.basename(file).slice(0, 1) !== '.') {
             try {
                 const r = require(file);
                 router = (r.default || r)(router);

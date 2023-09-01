@@ -1,11 +1,11 @@
-import { ResponseOk } from "../response";
-import { TextService } from "../services/TextService";
+import { Request, Response } from "express";
+import { TestServiceModule } from "../services/testService";
 
 export default function (router: any) {
 
     //@Get('/test')
-    router.get('/test', async (req: any, res: any) => {
-        return ResponseOk(await TextService(req), res);
+    router.get('/test', async (req: Request, res: Response) => {
+        return await TestServiceModule(req, res)
     })
 
     return router;
