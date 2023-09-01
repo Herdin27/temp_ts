@@ -8,16 +8,20 @@ import { ResponseError, ResponseNetworkError, ResponseOk } from "./response"
 
 export const TestServiceModule = async (req: Request<any>, res: Response<any, Record<string, any>>) => {
     try {
-        const { validate, data } = ValidateSchema(RequestTestSchema, {
-            foo: Number(req.query.foo)
-        })
+        const { validate, data }: { validate: boolean, data: ResponseTestData } =
+            ValidateSchema(RequestTestSchema, {
+                foo: Number(req.query.foo)
+            })
         if (!validate) return ResponseNetworkError(data, res)
 
         db.query('select * from temp_muat', (err: any, rows: ResponseTestData[]) => {
             if (err) return ResponseNetworkError(err, res)
             for (let i in rows) {
-                const _rows = { ...rows[i], tanggal: String(rows[i].tanggal) }
-                const { validate, data } = ValidateSchema(ResponseTestSchema, _rows)
+                const { validate, data }: { validate: boolean, data: ResponseTestData } =
+                    ValidateSchema(ResponseTestSchema, {
+                        ...rows[i],
+                        tanggal: String(rows[i].tanggal)
+                    })
                 if (!validate) return ResponseNetworkError(data, res)
             }
             return ResponseOk(rows, res)

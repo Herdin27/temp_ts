@@ -26,7 +26,7 @@ export const Query = (query: string, params?: string[] | number[] | any) => {
  * 
  * this funstion for describe error
  */
-export const DumpError = (err: unknown | any) => {
+export const DumpError = (err: unknown | any): void => {
     if (typeof err === "object") {
         if (err) {
             console.log(chalk.red(err));
