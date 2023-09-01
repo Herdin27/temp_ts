@@ -12,7 +12,7 @@ import { Request } from "express";
  * @returns 
  */
 
-export const Query = (query: string, params?: string[] | number[] | any) => {
+export const Query = (query: string, params?: string[] | number[]) => {
     return new Promise((resolve, reject) => {
         db.query(query, params, async (error: any, rows: any, fields: any) => {
             if (error) throw reject(error);

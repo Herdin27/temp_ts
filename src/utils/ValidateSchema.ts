@@ -1,9 +1,10 @@
 import Ajv from "ajv"
 import { JTDDataType } from "ajv/dist/core"
+import { OutValidateSchema } from "../types"
 
 const ajv = new Ajv()
 
-export const ValidateSchema = (Schema: any, dataDto: string[] | any): { validate: boolean, data: string | any } => {
+export const ValidateSchema = (Schema: any, dataDto: string[] | object | object[]): OutValidateSchema => {
 
     type MyData = JTDDataType<typeof Schema>
     const validate = ajv.compile<MyData>(Schema)

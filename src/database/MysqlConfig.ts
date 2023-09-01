@@ -1,6 +1,6 @@
 import mysql, { MysqlError, Pool, PoolConnection } from 'mysql'
 
-export function connectToDatabase(viewLog?: boolean) {
+export function connectToDatabase(viewLog?: boolean): Pool {
     const connection: Pool = mysql.createPool({
         connectTimeout: 10000,
         waitForConnections: true,

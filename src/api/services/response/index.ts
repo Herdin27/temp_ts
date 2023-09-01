@@ -19,15 +19,12 @@ export const ResponseError = (data: any, res: Response): Response => {
     return ResponseNetworkError('Parameter data is null! ERROR', res)
 }
 
-export const ResponseUnAuthorized = (data: any, res: Response): Response => {
-    if (data) {
-        DumpError(new Error(data))
-        return res.status(401).send({
-            status: 'FAILED',
-            message: "Error Unauthorized !"
-        })
-    }
-    return ResponseNetworkError('Parameter data is null! ERROR', res)
+export const ResponseUnAuthorized = (res: Response, data?: string): Response => {
+    DumpError(new Error(data))
+    return res.status(401).send({
+        status: 'FAILED',
+        message: "Error Unauthorized !"
+    })
 }
 
 export const ResponseNetworkError = (data: any, res: Response): Response => {

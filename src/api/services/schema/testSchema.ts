@@ -1,5 +1,5 @@
 import { JSONSchemaType } from "ajv"
-import { RequestTestData, ResponseTestData } from "../interface"
+import { RequestTestData, ResponseTestData } from "../../../interface"
 
 export const RequestTestSchema: JSONSchemaType<RequestTestData> = {
     type: "object",
