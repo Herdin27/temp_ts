@@ -2,7 +2,6 @@ import { verify } from "jsonwebtoken";
 import { db } from "../database/MysqlConfig";
 import chalk from "chalk";
 import { Request } from "express";
-import { MysqlError } from "mysql";
 
 /**
  * 
@@ -28,7 +27,7 @@ export const Query = (query: string, params?: string[] | number[] | any) => {
  * 
  * this funstion for describe error
  */
-export const DumpError = (err: unknown | any): void => {
+export const DumpError = (err: Error): void => {
     if (typeof err === "object") {
         if (err) {
             console.log(chalk.red(err));

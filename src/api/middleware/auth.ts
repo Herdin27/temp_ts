@@ -12,7 +12,7 @@ export const Auth = async (req: Request, res: Response, next: NextFunction) => {
         const verified: string | JwtPayload = verify(String(token), 'process.env.TOKEN_KEY')
         res.set('user', String(verified));
         return next()
-    } catch (error) {
+    } catch (error: any) {
         DumpError(error)
         return res.status(400).send({ message: 'Invalid token' })
     }

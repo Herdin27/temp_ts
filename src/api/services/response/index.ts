@@ -10,7 +10,7 @@ export const ResponseOk = (data: any, res: Response): Response => {
 
 export const ResponseError = (data: any, res: Response): Response => {
     if (data) {
-        DumpError(JSON.stringify(data))
+        DumpError(new Error(data))
         return res.status(400).send({
             status: 'FAILED',
             message: data
@@ -21,7 +21,7 @@ export const ResponseError = (data: any, res: Response): Response => {
 
 export const ResponseUnAuthorized = (data: any, res: Response): Response => {
     if (data) {
-        DumpError(JSON.stringify(data))
+        DumpError(new Error(data))
         return res.status(401).send({
             status: 'FAILED',
             message: "Error Unauthorized !"
@@ -32,7 +32,7 @@ export const ResponseUnAuthorized = (data: any, res: Response): Response => {
 
 export const ResponseNetworkError = (data: any, res: Response): Response => {
     if (data) {
-        DumpError(JSON.stringify(data))
+        DumpError(new Error(data))
         return res.status(500).send({
             status: 'NETWORK ERROR',
             message: 'Errors from the Server !'

@@ -2,11 +2,12 @@ import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser';
 import resIp from 'request-ip';
 import express from 'express';
+import { Server } from 'http';
 import chalk from "chalk";
 import Cors from 'cors';
+import path from 'path';
 import 'dotenv/config'
 import { RoutesLoader } from '../src/loader/ExpressLoader';
-import path from 'path';
 import { connectToDatabase } from '../src/database/MysqlConfig';
 
 interface Props {
@@ -29,7 +30,7 @@ export const BootstrapModule = (
         routePrefix,
         LogConnectionToDB
     }: Props
-): Promise<unknown> => {
+): Promise<Server> => {
 
     const app: express.Express = express()
 

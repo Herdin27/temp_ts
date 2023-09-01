@@ -36,12 +36,10 @@ export function RoutesLoader(loadPath: string, recursive: boolean): Router {
             try {
                 const r = require(file);
                 router = (r.default || r)(router);
-            } catch (e: any) {
-                throw new Error("Error when loading route file: " + file + " [" + e.toString() + "]");
+            } catch (error: any) {
+                throw new Error("Error when loading route file: " + file + " [" + error.toString() + "]");
             }
         }
-
     }
-
     return router;
 }
