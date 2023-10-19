@@ -1,3 +1,4 @@
+import { Props } from '../src/interface';
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser';
 import resIp from 'request-ip';
@@ -10,15 +11,6 @@ import 'dotenv/config'
 import { RoutesLoader } from '../src/loader/ExpressLoader';
 import { connectToDatabase } from '../src/database/MysqlConfig';
 
-interface Props {
-    port?: number,
-    cors?: boolean,
-    reqIp?: boolean,
-    cookies?: boolean,
-    bodyparser?: boolean,
-    routePrefix?: string,
-    LogConnectionToDB?: boolean
-}
 
 export const BootstrapModule = (
     {
@@ -34,7 +26,7 @@ export const BootstrapModule = (
 
     const app: express.Express = express()
 
-    return new Promise(async function (resolve, reject) {
+    return new Promise((resolve, reject) => {
         try {
             LogConnectionToDB && connectToDatabase(true)
             cors && app.use(Cors())

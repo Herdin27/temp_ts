@@ -11,3 +11,13 @@ export interface RequestTestData {
     foo: number
     bar?: string
 }
+
+export interface Props {
+    port?: number,
+    cors?: boolean,
+    reqIp?: boolean,
+    cookies?: boolean,
+    bodyparser?: boolean,
+    routePrefix?: string,
+    LogConnectionToDB?: boolean
+}

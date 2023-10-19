@@ -14,7 +14,7 @@ import { Request } from "express";
 
 export const Query = (query: string, params?: string[] | number[]) => {
     return new Promise((resolve, reject) => {
-        db.query(query, params, async (error: any, rows: any, fields: any) => {
+        db.query(query, params, async (error: unknown, rows: string[] | number[], fields: unknown) => {
             if (error) throw reject(error);
             resolve({ rows, fields })
         })

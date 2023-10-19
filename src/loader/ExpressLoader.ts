@@ -34,10 +34,11 @@ export function RoutesLoader(loadPath: string, recursive: boolean): Router {
             ['.js', '.ts'].indexOf(path.extname(file).toLowerCase()) !== -1 &&
             path.basename(file).slice(0, 1) !== '.') {
             try {
+                // eslint-disable-next-line @typescript-eslint/no-var-requires
                 const r = require(file);
                 router = (r.default || r)(router);
-            } catch (error: any) {
-                throw new Error("Error when loading route file: " + file + " [" + error.toString() + "]");
+            } catch (error: unknown) {
+                throw new Error("Error when loading route file: " + file + " [" + String(error) + "]");
             }
         }
     }

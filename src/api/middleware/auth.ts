@@ -13,8 +13,8 @@ export const Auth = async (req: Request, res: Response, next: NextFunction): Pro
         const verified = verify(String(token), 'process.env.TOKEN_KEY')
         res.set('user', String(verified));
         return next()
-    } catch (error: any) {
-        DumpError(error)
+    } catch (error: unknown) {
+        DumpError(new Error(String(error)))
         return ResponseUnAuthorized(res, 'Invalid Token !')
     }
 };

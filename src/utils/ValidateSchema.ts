@@ -1,10 +1,11 @@
 import Ajv from "ajv"
-import { JTDDataType } from "ajv/dist/core"
+import { JSONSchemaType, JTDDataType } from "ajv/dist/core"
 import { OutValidateSchema } from "../types"
+import { RequestTestData } from "../interface"
 
 const ajv = new Ajv()
 
-export const ValidateSchema = (Schema: any, dataDto: string[] | object | object[]): OutValidateSchema => {
+export const ValidateSchema = (Schema: JSONSchemaType<RequestTestData> | string[] | number[], dataDto: string[] | object | object[]): OutValidateSchema => {
 
     type MyData = JTDDataType<typeof Schema>
     const validate = ajv.compile<MyData>(Schema)
@@ -13,12 +14,12 @@ export const ValidateSchema = (Schema: any, dataDto: string[] | object | object[
         case true:
             return {
                 validate: true,
-                data: dataDto
+                data: String(dataDto)
             }
         default:
             return {
                 validate: false,
-                data: validate.errors
+                data: String(validate.errors)
             }
     }
 }
